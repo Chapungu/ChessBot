@@ -5,6 +5,9 @@
 #include "coordinates.hpp"
 
 // main() runs in its own thread in the OS
+
+
+
 DigitalOut Green(LED1);
 DigitalOut Yellow(LED2);
 DigitalOut Red(LED3);
@@ -18,11 +21,17 @@ void Xaxis_thread();
 void Yaxis_thread();
 void Zaxis_thread();
 
+
+
+
 int main()
 {   
     
+    
+
     printf("in Main \r\n");
     
+
 
     StepX.start(Xaxis_thread);
     StepY.start(Yaxis_thread);
@@ -31,7 +40,8 @@ int main()
 
 
     while(1){
-        __NOP();  //prevent while from being compiled out
+       // __NOP();  //prevent while from being compiled out
+       sleep();
     }
         
     wait_us(5000000);
@@ -42,7 +52,7 @@ int main()
 void Xaxis_thread(){
     
     while(1){
-        xaxis.move(XLeft, RowC);
+        xaxis.move(XLeft, RowG);
         printf("Xaxis end move \n");
         while(1){__NOP();}
     }
@@ -51,9 +61,9 @@ void Xaxis_thread(){
 void Yaxis_thread(){
     
     while(1){
-        yaxis.move(Yforward, Row3);
-        while(1){__NOP();}
+        yaxis.move(Yforward, Row2);
         printf("Yaxis end move \n");
+        while(1){__NOP();}
     }
 };
 void Zaxis_thread(){

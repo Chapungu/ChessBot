@@ -8,4 +8,7 @@
 #define Zup
 #define Zdown
 
+#define SwitchX PC_0
+#define SwitchY PA_3
+
 #endif
