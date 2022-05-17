@@ -45,7 +45,7 @@ int main()
 
 
     StepX.start(Xaxis_thread);
-    //StepY.start(Yaxis_thread);
+    StepY.start(Yaxis_thread);
     //StepZ.start(Zaxis_thread);
 
     xaxis.move(1,80);
@@ -53,7 +53,7 @@ int main()
 
 
     while(1){
-       // __NOP();  //prevent while from being compiled out
+        __NOP();  //prevent while from being compiled out
        sleep();
     }
         
