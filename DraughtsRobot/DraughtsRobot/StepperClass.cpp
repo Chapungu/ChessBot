@@ -20,14 +20,15 @@ void stepper::move(int dir, int dist) {
 
   m_direction = dir;
   steps = distance(dist);
-  Location = dist;
-  // ThisThread::flags_wait_all(someFlag, false); //wait for some flag
+
+  
+
 
   for (int i = 0; i < steps; i++) {
     m_step = 1;
-    ThisThread::sleep_for(2ms);
+    ThisThread::sleep_for(1ms);
     m_step = 0;
-    ThisThread::sleep_for(2ms);
+    ThisThread::sleep_for(1ms);
     int check = 1; // m_switch.read(); //SET TO IGNORE SWITCH
     if (check == 0) {
       printf("location at 0 \n");
@@ -53,3 +54,6 @@ int stepper::distance(int Mmeter) {
 }
 
 void stepper::Calibrate() { Location = 0; }
+
+int stepper::getlocation(){ return Location;}
+void stepper::setlocation(int set){Location = set;}

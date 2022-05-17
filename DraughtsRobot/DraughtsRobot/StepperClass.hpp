@@ -44,6 +44,8 @@ class stepper{
 
         void Calibrate();
 
+        int getlocation();
+        void setlocation(int);
 }; //end stepper class
 
 

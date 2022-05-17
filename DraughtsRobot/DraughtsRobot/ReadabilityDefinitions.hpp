@@ -5,8 +5,8 @@
 #define XRight      1
 #define Yforward    1
 #define Ybackward   0
-#define Zup
-#define Zdown
+#define Zup         0
+#define Zdown       1
 
 #define SwitchX PC_0
 #define SwitchY PA_3

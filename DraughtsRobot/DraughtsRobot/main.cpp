@@ -24,27 +24,66 @@ stepper zaxis(zAxisPins);
 char myBuffer[2];
 
 void Dmove(int, int);
+void GrabPeice();
 int Xcoord(char);
 int Ycoord(char);
 
 // main() runs in its own thread in the OS
 int main() {
-  cout << "enter MoveSquare (letter then number)" << endl;
-  scanf( "%s",myBuffer);
+  /*
+  while(1){
+      printf("move the z axis test\n\r");
+      scanf("%s",myBuffer);
+      printf("scanned is: %s\n\r",myBuffer);
+      if(myBuffer[0] == '1'){zaxis.move(1,200);}
+      if(myBuffer[0] == '0'){zaxis.move(0,200);}
+  }
+  */
+  xaxis.setlocation(0);
+  yaxis.setlocation(0);
 
-  printf("moveing to: %s\n\r",myBuffer);
+  while (1) {
+    cout << "enter MoveSquare (letter then number)" << endl;
+    scanf("%s", myBuffer);
 
+    printf("moveing to: %s\n\r", myBuffer);  
+    
+    Dmove(Xcoord(myBuffer[0]), Ycoord(myBuffer[1]));
+    GrabPeice();
+  }
 
   // int test = stod("24");
 
 
-
-  Dmove(Xcoord(myBuffer[0]),Ycoord(myBuffer[1]));
 }
 
 void Dmove(int x, int y) {
-  yaxis.move(Yforward, y);
-  xaxis.move(XLeft, x);
+  int xmov, ymov, xdir, ydir = 0;
+  int xloc = xaxis.getlocation();
+  int yloc = yaxis.getlocation();
+
+  if (x > xloc) {
+    xdir = XLeft;
+    xmov = x - xloc;
+  } else if (x < xloc) {
+    xdir = XRight;
+    xmov = xloc - x;
+  }
+  if (y > yloc) {
+    ydir = Yforward;
+    ymov = y - yloc;
+  } else if (y < yloc) {
+    ydir = Ybackward;
+    ymov = yloc - y;
+  }
+
+  yaxis.move(ydir, ymov);
+  xaxis.move(xdir, xmov);
+  xaxis.setlocation(x);
+  yaxis.setlocation(y);
+  xloc = xaxis.getlocation();
+  yloc = yaxis.getlocation();
+  printf("the location is x: %d and y %d\n\r",xloc,yloc);
 }
 
 int Xcoord(char x) {
@@ -75,7 +114,7 @@ int Xcoord(char x) {
     xsquare = ColH;
     break;
   }
-  return xsquare; 
+  return xsquare;
 }
 
 int Ycoord(char y) {
@@ -106,5 +145,14 @@ int Ycoord(char y) {
     ysquare = Row8;
     break;
   }
-  return ysquare; 
+  return ysquare;
+}
+
+void GrabPeice(){
+    zaxis.move(Zdown,GRAB);
+    //electromagnet= !electromagnet;
+    ThisThread::sleep_for(1s);
+    
+    zaxis.move(Zup,GRAB);
+
 }
