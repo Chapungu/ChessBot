@@ -22,7 +22,7 @@
 #define ColB 38 + ColC      //238
 #define ColA 38 + ColB      //276
 
-#define GRAB 200
+#define GRAB 190
 
 
 typedef struct{

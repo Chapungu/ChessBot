@@ -17,6 +17,7 @@ Buffer coordBuff;
 DigitalOut Green(LED1);
 DigitalOut Yellow(LED2);
 DigitalOut Red(LED3);
+DigitalOut EMagnet(Elec_Magnet);
 stepper xaxis(xAxisPins);
 stepper yaxis(yAxisPins);
 stepper zaxis(zAxisPins);
@@ -39,6 +40,10 @@ int main() {
       if(myBuffer[0] == '0'){zaxis.move(0,200);}
   }
   */
+  
+  //while(1){ThisThread::sleep_for(10s);EMagnet = 1; }
+  
+  EMagnet = 0;
   xaxis.setlocation(0);
   yaxis.setlocation(0);
 
@@ -50,8 +55,9 @@ int main() {
     
     Dmove(Xcoord(myBuffer[0]), Ycoord(myBuffer[1]));
     GrabPeice();
+ 
   }
-
+ 
   // int test = stod("24");
 
 
@@ -150,7 +156,7 @@ int Ycoord(char y) {
 
 void GrabPeice(){
     zaxis.move(Zdown,GRAB);
-    //electromagnet= !electromagnet;
+    EMagnet = !EMagnet;
     ThisThread::sleep_for(1s);
     
     zaxis.move(Zup,GRAB);

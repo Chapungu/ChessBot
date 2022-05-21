@@ -31,4 +31,7 @@ const StepperPins xAxisPins{
     PF_15,  //Step      D2 (green)
     PC_0,  //Switch     A1
 };
+
+#define Elec_Magnet PF_10  // A5
+
 #endif
