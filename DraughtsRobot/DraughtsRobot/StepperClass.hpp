@@ -41,10 +41,29 @@ class stepper{
         @Note			- assumes 1/4 step, so 0.05mm per step. 
         */
         int distance(int Mmeter);
-
+        /* ----------------------------------------------------------
+        @function		- Calibrate
+        @brief 			- Calibrates the stepper motors to location 0
+        @Param          - none
+        @return			- 
+        @Note			- . 
+        */
         void Calibrate();
-
+        /* ----------------------------------------------------------
+        @function		- getlocation
+        @brief 			- gets the location of the stepper motor from the class instance
+        @Param          - none
+        @return			- location.
+        @Note			- . 
+        */
         int getlocation();
+                /* ----------------------------------------------------------
+        @function		- setlocation
+        @brief 			- sets the location variable in the class instance
+        @Param          - the location value. 
+        @return			- .
+        @Note			- . 
+        */
         void setlocation(int);
 }; //end stepper class
 
