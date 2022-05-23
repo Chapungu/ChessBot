@@ -42,6 +42,12 @@ class Buffer{
         return size;
     }
 
+    void clear(){
+         head = 0;//pointer to start reading data
+        tail = head; //pointer to stop reading data
+        size = 0;//how much data. 
+    }
+
     private:
         uint8_t buff[BUFFER_CAPACITY];
         uint8_t head;

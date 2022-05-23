@@ -25,9 +25,5 @@
 #define GRAB 190
 
 
-typedef struct{
-
-
-}Coordinate; 
 
 #endif
