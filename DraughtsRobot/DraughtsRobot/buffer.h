@@ -15,12 +15,13 @@ class Buffer{
     void put(uint8_t data){
 
         if (size >= BUFFER_CAPACITY){
-            //printf("No Space in buffer\r\n");
+            printf("No Space in buffer\r\n");
             return;
         }else{
             buff[head] = data; //put data at head then increment head
             head = ((head + 1) % BUFFER_CAPACITY);
             size++;
+            printf("buffer filling, Head = %d, Tail = %d\n\r",head,tail);
         }
 
     }
@@ -30,9 +31,10 @@ class Buffer{
         if(size <= 0){
             printf("Buffer Underrun\r\n");
         }else{
-            uint8_t data = buff[tail];
+            data = buff[tail];
             tail = ((tail + 1) % BUFFER_CAPACITY);
             size--;
+            printf("buffer emptying, Head = %d, Tail = %d\n\r",head,tail);
         }
 
         return data;

@@ -10,6 +10,16 @@ void TheBoard::SetBoard(int i,int PV){
     i--;
     Board[i] = PV;
 }
+void TheBoard::PrintBoard(){
+    for (int i = 1; i < 9; i++){
+        for (int j = 1; j < 9; j++){
+            int location = (i*8)+j;
+            location = GetBoard(location);
+            printf("%d ",location);
+        }
+        printf("/n/r");
+    }
+}
 
 GPlay::GPlay(StepperPins xPins, StepperPins yPins, StepperPins zPins, PinName Magnet):
     xaxis(xPins),
@@ -18,6 +28,40 @@ GPlay::GPlay(StepperPins xPins, StepperPins yPins, StepperPins zPins, PinName Ma
     EMagnet(Magnet){
         
     }
+
+void GPlay::Dmove(int inputx,int inputy){
+      int xmov, ymov, xdir, ydir = 0;
+
+  int x = inputx;
+  int y = inputy;
+  
+
+  int xloc = xaxis.getlocation();
+  int yloc = yaxis.getlocation();
+
+  if (x > xloc) {
+    xdir = XLeft;
+    xmov = x - xloc;
+  } else if (x < xloc) {
+    xdir = XRight;
+    xmov = xloc - x;
+  }
+  if (y > yloc) {
+    ydir = Yforward;
+    ymov = y - yloc;
+  } else if (y < yloc) {
+    ydir = Ybackward;
+    ymov = yloc - y;
+  }
+
+  yaxis.move(ydir, ymov);
+  xaxis.move(xdir, xmov);
+  xaxis.setlocation(x);
+  yaxis.setlocation(y);
+  xloc = xaxis.getlocation();
+  yloc = yaxis.getlocation();
+  printf("the location is x: %d and y %d\n\r",xloc,yloc);
+}
 
 void GPlay::Dmove(char b0, char b1) {
   int xmov, ymov, xdir, ydir = 0;
@@ -95,7 +139,6 @@ int GPlay::Xcoord(char x,int *col) {
   }
   return xsquare;
 }
-
 int GPlay::Ycoord(char y ,int *row) {
   int ysquare = 0;
   switch (y) {

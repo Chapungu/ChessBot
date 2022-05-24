@@ -24,6 +24,7 @@ class TheBoard {
 
     int GetBoard(int i);
     void SetBoard(int i, int PV);
+    void PrintBoard();
 
 
 };
@@ -55,7 +56,7 @@ class GPlay: public TheBoard{
     GPlay(StepperPins xPins, StepperPins yPins, StepperPins zPins, PinName Magnet);
 
 
-
+    void Dmove(int,int);
     void Dmove(char,char);
 
     int Xcoord(char x,int *col);

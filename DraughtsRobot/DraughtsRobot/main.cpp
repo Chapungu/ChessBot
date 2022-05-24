@@ -8,12 +8,15 @@
 #include <cstdint>
 #include <string>
 #include "Gameplay.hpp"
+#include "AI.hpp"
+
 
 
 // main() runs in its own thread in the OS
 
 
 GPlay Gameplay(xAxisPins,yAxisPins,zAxisPins,Elec_Magnet); 
+AI Green;
 
 //TODO work out where you want the buffer to be stored. 
 char PickSquare[2];
@@ -36,6 +39,12 @@ int main() {
     Gameplay.Dmove(DropSquare[0],DropSquare[1]);
     Gameplay.DropPeice();
  
+    Green.AVmoves();
+    Green.DecideMove();
+    Gameplay.Dmove(Green.ReturnX(Green.GetMoveFrom()),Green.ReturnY(Green.GetMoveFrom()));
+    Gameplay.GrabPeice();
+    Gameplay.Dmove(Green.ReturnX(Green.GetMoveTo()),Green.ReturnY(Green.GetMoveTo()));
+    Gameplay.DropPeice();
     
 
   }
