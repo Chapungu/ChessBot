@@ -27,6 +27,8 @@ char DropSquare[2];
 // main() 
 int main() {
 
+    cout << "welcome you are playing orange" << endl;
+
   while (1) {
     cout << "enter pickup square (letter then number)" << endl;
     scanf("%s", PickSquare);
