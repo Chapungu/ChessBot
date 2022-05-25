@@ -5,32 +5,10 @@
 #include "Pins.hpp"
 #include "coordinates.hpp"
 #include "mbed.h"
-
-class TheBoard {
-    
-    private:
-
-    int Board[64] = {   2,3,2,3,2,3,2,3,
-                        3,2,3,2,3,2,3,2,
-                        2,3,2,3,2,3,2,3,
-                        3,0,3,0,3,0,3,0,
-                        0,3,0,3,0,3,0,3,
-                        3,1,3,1,3,1,3,1,
-                        1,3,1,3,1,3,1,3,
-                        3,1,3,1,3,1,3,1     }; 
-    
-    
-    public:
-
-    int GetBoard(int i);
-    void SetBoard(int i, int PV);
-    void PrintBoard();
+#include "TheBoard.hpp"
 
 
-};
-
-
-class GPlay: public TheBoard{
+class GPlay{
     private:
 
     DigitalOut EMagnet;
@@ -38,29 +16,33 @@ class GPlay: public TheBoard{
     stepper yaxis;
     stepper zaxis;
 
+    TheBoard *ChessBoard; 
+
     int XCol = 0;
     int YRow = 0;
     int PeiceValue = 0;
-/*
-      int Board[64] = {     2,0,2,0,2,0,2,0,
-                            0,2,0,2,0,2,0,2,
-                            2,0,2,0,2,0,2,0,
-                            0,0,0,0,0,0,0,0,
-                            0,0,0,0,0,0,0,0,
-                            0,1,0,1,0,1,0,1,
-                            1,0,1,0,1,0,1,0,
-                            0,1,0,1,0,1,0,1     }; 
-*/
+
     public:
     //constructor
-    GPlay(StepperPins xPins, StepperPins yPins, StepperPins zPins, PinName Magnet);
+    GPlay(StepperPins xPins, StepperPins yPins, StepperPins zPins, PinName Magnet, TheBoard *board);
 
-
-    void Dmove(int,int);
+        /* ----------------------------------------------------------
+    @function		- Dmove
+    @brief 			- gets location of end effector
+    @brief 			- calulates distance to new location
+    @brief 			- moves steppers, updates location
+    @Param          - X square.
+    @Param          - Peice Value
+    @return			- none
+    @Note			- the array is 1 below the square number. 
+    */
+    void Dmove(int);
     void Dmove(char,char);
 
     int Xcoord(char x,int *col);
     int Ycoord(char y,int *row);
+    int ReturnX(int square);
+    int ReturnY(int square);
 
     int CalBoardValue(int *XCol,int *YRow);
     void SetPeiceValue(int);

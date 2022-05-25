@@ -14,9 +14,9 @@
 
 // main() runs in its own thread in the OS
 
-
-GPlay Gameplay(xAxisPins,yAxisPins,zAxisPins,Elec_Magnet); 
-AI Green;
+TheBoard ChessBoard; 
+GPlay Gameplay(xAxisPins,yAxisPins,zAxisPins,Elec_Magnet,&ChessBoard); 
+AI Green(&ChessBoard);
 
 //TODO work out where you want the buffer to be stored. 
 char PickSquare[2];
@@ -41,9 +41,9 @@ int main() {
  
     Green.AVmoves();
     Green.DecideMove();
-    Gameplay.Dmove(Green.ReturnX(Green.GetMoveFrom()),Green.ReturnY(Green.GetMoveFrom()));
+    Gameplay.Dmove(Green.GetMoveFrom());
     Gameplay.GrabPeice();
-    Gameplay.Dmove(Green.ReturnX(Green.GetMoveTo()),Green.ReturnY(Green.GetMoveTo()));
+    Gameplay.Dmove(Green.GetMoveTo());
     Gameplay.DropPeice();
     
 

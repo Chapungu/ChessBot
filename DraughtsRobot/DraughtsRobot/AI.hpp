@@ -5,25 +5,25 @@
 #include "buffer.h"
 #include "coordinates.hpp"
 #include "mbed.h"
+#include "TheBoard.hpp"
 
-class AI : public TheBoard, public Buffer {
+class AI :public Buffer {
 private:
   Buffer TakeMoves;
   Buffer Tpeices;
   Buffer Moves;
   Buffer Peices;
+  TheBoard *ChessBoard;    //provide place to store address of the board
 
   int MoveFrom;
   int MoveTo;
   
 
 public:
-  AI();
+  AI(TheBoard *board);     //provide interface to pass chess board address
 
   void AVmoves();
   void DecideMove();
-  int ReturnX(int square);
-  int ReturnY(int square);
   int GetMoveFrom();
   int GetMoveTo();
   void ClearCoordinates();

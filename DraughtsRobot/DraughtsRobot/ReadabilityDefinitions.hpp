@@ -11,4 +11,7 @@
 #define SwitchX PC_0
 #define SwitchY PA_3
 
+//#define LeftEdgeSquares 1,17,33,48
+const int LeftEdgeSquares[4] = {1,17,33,48};
+
 #endif

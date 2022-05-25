@@ -1,39 +1,21 @@
 
 #include "Gameplay.hpp"
 
-int TheBoard::GetBoard(int i){
-        i--;
-        return Board[i];
-    }
 
-void TheBoard::SetBoard(int i,int PV){
-    i--;
-    Board[i] = PV;
-}
-void TheBoard::PrintBoard(){
-    for (int i = 1; i < 9; i++){
-        for (int j = 1; j < 9; j++){
-            int location = (i*8)+j;
-            location = GetBoard(location);
-            printf("%d ",location);
-        }
-        printf("/n/r");
-    }
-}
 
-GPlay::GPlay(StepperPins xPins, StepperPins yPins, StepperPins zPins, PinName Magnet):
+GPlay::GPlay(StepperPins xPins, StepperPins yPins, StepperPins zPins, PinName Magnet, TheBoard *board):
     xaxis(xPins),
     yaxis(yPins),
     zaxis(zPins),
     EMagnet(Magnet){
-        
+    ChessBoard = board;
     }
 
-void GPlay::Dmove(int inputx,int inputy){
+void GPlay::Dmove(int square){
       int xmov, ymov, xdir, ydir = 0;
 
-  int x = inputx;
-  int y = inputy;
+  int x = ReturnX(square);
+  int y = ReturnY(square);
   
 
   int xloc = xaxis.getlocation();
@@ -178,6 +160,71 @@ int GPlay::Ycoord(char y ,int *row) {
     ysquare = 0;
   }
   return ysquare;
+
+}
+int GPlay::ReturnX(int square){
+    int x = square%8;//TODO this can return 0 there is no case for that. 
+    int xR = 0;
+    switch (x) {
+    case 1:
+        xR = ColA;
+        break;
+    case 2:
+        xR = ColB;
+        break;
+    case 3:
+        xR = ColC;
+        break;
+    case 4:
+        xR = ColD;
+        break;
+    case 5:
+        xR = ColE;
+        break;
+    case 6:
+        xR = ColF;
+        break;
+    case 7:
+        xR = ColG;
+        break;
+    case 0:
+        xR = ColH;
+        break;
+    }
+    printf("coordinate X = %d \n\r",xR);
+    return xR;
+}
+int GPlay::ReturnY(int square){
+    int y = (square/8);
+    int yR = 0;
+    switch (y) {
+    case 0:
+        yR = Row1;
+        break;
+    case 1:
+        yR = Row2;
+        break;
+    case 2:
+        yR = Row3;
+        break;
+    case 3:
+        yR = Row4;
+        break;
+    case 4:
+        yR = Row5;
+        break;
+    case 5:
+        yR = Row6;
+        break;
+    case 6:
+        yR = Row7;
+        break;
+    case 7:
+        yR = Row8;
+        break;
+    }
+    printf("coordinate Y = %d \n\r",yR);
+    return yR; 
 }
 
 int GPlay::CalBoardValue(int *XCol,int *YRow){
@@ -200,8 +247,8 @@ int GPlay::GetPeiceValue(){
 
 void GPlay::GrabPeice(){
     int UpBoard = CalBoardValue(&XCol,&YRow);
-    SetPeiceValue(GetBoard(UpBoard));
-    SetBoard(UpBoard,0);
+    SetPeiceValue(ChessBoard->GetBoard(UpBoard));
+    ChessBoard->SetBoard(UpBoard,0);
     zaxis.move(Zdown,GRAB);
     EMagnet = 1;
     ThisThread::sleep_for(1s);
@@ -210,7 +257,7 @@ void GPlay::GrabPeice(){
 
 void GPlay::DropPeice(){
     int DwnBoard = CalBoardValue(&XCol, &YRow);
-    SetBoard(DwnBoard,PeiceValue);
+    ChessBoard->SetBoard(DwnBoard,PeiceValue);
     zaxis.move(Zdown,GRAB);
     EMagnet = 0; 
     ThisThread::sleep_for(1s);
