@@ -27,12 +27,12 @@ char DropSquare[2];
 // main() 
 int main() {
 
-    cout << "welcome you are playing orange" << endl;
+    cout << "Welcome, You are playing Orange" << endl;
 
   while (1) {
-    cout << "enter pickup square (letter then number)" << endl;
+    cout << "Enter Square of Peice to Move.(letter then number)" << endl;
     scanf("%s", PickSquare);
-    cout << "enter drop off square (letter then number)" << endl; 
+    cout << "Enter Square to move to.(letter then number)" << endl; 
     scanf("%s",DropSquare);
 
     
