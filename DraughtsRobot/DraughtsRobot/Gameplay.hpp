@@ -18,6 +18,8 @@ class GPlay{
 
     TheBoard *ChessBoard; 
 
+    int UpBoard;
+    int DwnBoard;
     int XCol = 0;
     int YRow = 0;
     int PeiceValue = 0;
@@ -74,7 +76,7 @@ class GPlay{
     @return			- xR
     @Note			- 
     */
-    int ReturnX(int square);
+    int ReturnX(int square,int *col);
     /* ----------------------------------------------------------
     @function		- ReturnY
     @brief 			- takes array coordinates and converts into distances 
@@ -82,7 +84,7 @@ class GPlay{
     @return			- xY
     @Note			- 
     */
-    int ReturnY(int square);
+    int ReturnY(int square, int *row);
     /* ----------------------------------------------------------
     @function		- CalBoardValue
     @brief 			- calculates the array coordinates from the input X and Y values

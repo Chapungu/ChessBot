@@ -18,7 +18,7 @@ void AI::AVmoves() {
         } else if (ChessBoard->GetBoard(i + 7) == 1 &
                    ChessBoard->GetBoard(i + 18) == 0) {
           Tpeices.put(i);
-          TakeMoves.put(i + 18);
+          TakeMoves.put(i + 14);
         }
       }
       if (i % 8 != 0) {
@@ -29,7 +29,7 @@ void AI::AVmoves() {
         } else if (ChessBoard->GetBoard(i + 9) == 1 &
                    ChessBoard->GetBoard(i + 14) == 0) {
           Tpeices.put(i);
-          TakeMoves.put(i + 14);
+          TakeMoves.put(i + 18);
         }
       }
     }
@@ -45,6 +45,8 @@ void AI::DecideMove() {
   } else if (Peices.getsize() != 0) {
     MoveFrom = Peices.pop();
     MoveTo = Moves.pop();
+    int TakenP = (((MoveTo-MoveFrom)/2)+MoveTo);
+    ChessBoard->SetBoard(TakenP,0);
 
   } else {
     printf("I SURRENDER");

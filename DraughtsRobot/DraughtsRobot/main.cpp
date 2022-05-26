@@ -41,14 +41,15 @@ int main() {
     Gameplay.Dmove(DropSquare[0],DropSquare[1]);
     Gameplay.DropPeice();
  
+ 
     Green.AVmoves();
     Green.DecideMove();
     Gameplay.Dmove(Green.GetMoveFrom());
     Gameplay.GrabPeice();
     Gameplay.Dmove(Green.GetMoveTo());
     Gameplay.DropPeice();
-    
 
+    ChessBoard.PrintBoard();
   }
  
 

@@ -1,5 +1,6 @@
 
 #include "Gameplay.hpp"
+#include <locale>
 
 
 
@@ -14,8 +15,8 @@ GPlay::GPlay(StepperPins xPins, StepperPins yPins, StepperPins zPins, PinName Ma
 void GPlay::Dmove(int square){
       int xmov, ymov, xdir, ydir = 0;
 
-  int x = ReturnX(square);
-  int y = ReturnY(square);
+  int x = ReturnX(square,&XCol);
+  int y = ReturnY(square,&YRow);
   
 
   int xloc = xaxis.getlocation();
@@ -162,65 +163,81 @@ int GPlay::Ycoord(char y ,int *row) {
   return ysquare;
 
 }
-int GPlay::ReturnX(int square){
-    int x = square%8;//TODO this can return 0 there is no case for that. 
+int GPlay::ReturnX(int square, int *col){
+    int x = square%8; 
     int xR = 0;
     switch (x) {
     case 1:
         xR = ColA;
+        *col = 1;
         break;
     case 2:
         xR = ColB;
+        *col = 2;
         break;
     case 3:
         xR = ColC;
+        *col = 3;
         break;
     case 4:
         xR = ColD;
+        *col = 4;
         break;
     case 5:
         xR = ColE;
+        *col = 5;
         break;
     case 6:
         xR = ColF;
+        *col = 6;
         break;
     case 7:
         xR = ColG;
+        *col = 7;
         break;
     case 0:
         xR = ColH;
+        *col = 8;
         break;
     }
     printf("coordinate X = %d \n\r",xR);
     return xR;
 }
-int GPlay::ReturnY(int square){
+int GPlay::ReturnY(int square ,int *row){
     int y = (square/8);
     int yR = 0;
     switch (y) {
     case 0:
         yR = Row1;
+        *row = 0;
         break;
     case 1:
         yR = Row2;
+        *row = 8;
         break;
     case 2:
         yR = Row3;
+        *row = 16;
         break;
     case 3:
         yR = Row4;
+        *row = 24;
         break;
     case 4:
         yR = Row5;
+        *row = 32;
         break;
     case 5:
         yR = Row6;
+        *row = 40;
         break;
     case 6:
         yR = Row7;
+        *row = 48;
         break;
     case 7:
         yR = Row8;
+        *row = 56;
         break;
     }
     printf("coordinate Y = %d \n\r",yR);
@@ -246,7 +263,7 @@ int GPlay::GetPeiceValue(){
 }
 
 void GPlay::GrabPeice(){
-    int UpBoard = CalBoardValue(&XCol,&YRow);
+    UpBoard = CalBoardValue(&XCol,&YRow);
     SetPeiceValue(ChessBoard->GetBoard(UpBoard));
     ChessBoard->SetBoard(UpBoard,0);
     zaxis.move(Zdown,GRAB);
@@ -256,7 +273,10 @@ void GPlay::GrabPeice(){
 }
 
 void GPlay::DropPeice(){
-    int DwnBoard = CalBoardValue(&XCol, &YRow);
+    DwnBoard = CalBoardValue(&XCol, &YRow);
+    if(DwnBoard<UpBoard){
+        int TakenP = UpBoard-((UpBoard-DwnBoard)/2);
+    }
     ChessBoard->SetBoard(DwnBoard,PeiceValue);
     zaxis.move(Zdown,GRAB);
     EMagnet = 0; 
