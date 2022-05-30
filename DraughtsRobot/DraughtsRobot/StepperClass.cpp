@@ -21,9 +21,6 @@ void stepper::move(int dir, int dist) {
   m_direction = dir;
   steps = distance(dist);
 
-  
-
-
   for (int i = 0; i < steps; i++) {
     m_step = 1;
     ThisThread::sleep_for(1ms);

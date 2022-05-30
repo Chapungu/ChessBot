@@ -41,15 +41,17 @@ void AI::DecideMove() {
 
     MoveFrom = Tpeices.pop();
     MoveTo = TakeMoves.pop();
+    int TakenP = (((MoveTo-MoveFrom)/2)+MoveTo);
+    ChessBoard->SetBoard(TakenP,0);
+
 
   } else if (Peices.getsize() != 0) {
     MoveFrom = Peices.pop();
     MoveTo = Moves.pop();
-    int TakenP = (((MoveTo-MoveFrom)/2)+MoveTo);
-    ChessBoard->SetBoard(TakenP,0);
+
 
   } else {
-    printf("I SURRENDER");
+    printf("I SURRENDER\n\r");
   }
   Tpeices.clear();
   TakeMoves.clear();
