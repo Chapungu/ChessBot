@@ -19,15 +19,12 @@ void stepper::move(int dir, int dist) {
   int steps;
 
   m_direction = dir;
-  steps = distance(dist);//gets amount of steps from distance function. 
+  steps = distance(dist);
 
-  
-
-
-  for (int i = 0; i < steps; i++) { //creates a 2ms pulse. 
-    m_step = 1;//sets step high
+  for (int i = 0; i < steps; i++) {
+    m_step = 1;
     ThisThread::sleep_for(1ms);
-    m_step = 0;//sets step low
+    m_step = 0;
     ThisThread::sleep_for(1ms);
     int check = 1; // m_switch.read(); //SET TO IGNORE SWITCH
     if (check == 0) {
@@ -43,7 +40,7 @@ void stepper::move(int dir, int dist) {
 
 int stepper::distance(int Mmeter) {
   int step;
-  step = Mmeter * 5;//calculate steps
+  step = Mmeter * 5;
 
   /*
   Full Step = *5

@@ -48,7 +48,7 @@ public:
     uint8_t data = 0;
 
     if (size <= 0) {
-      printf("Buffer Underrun\r\n");
+      printf("Buffer Empty\r\n");
     } else {
       data = buff[tail];
       tail = ((tail + 1) % BUFFER_CAPACITY);//creates a loop around for the buffer. 
