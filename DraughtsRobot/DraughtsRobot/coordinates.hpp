@@ -1,8 +1,8 @@
 #ifndef _COORDINATES_
 #define _COORDINATES_
 
-#define initDistY 80
-#define initDistX 10
+#define initDistY 80 //inital distance till board
+#define initDistX 10 //inital distance till board
 
 #define Row1 initDistY      //80
 #define Row2 38 + initDistY //118
@@ -22,7 +22,7 @@
 #define ColB 38 + ColC      //238
 #define ColA 38 + ColB      //276
 
-#define GRAB 190
+#define GRAB 190  //drop and raise distance
 
 
 

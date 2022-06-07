@@ -32,7 +32,7 @@ public:
       return;
     } else {
       buff[head] = data; // put data at head then increment head
-      head = ((head + 1) % BUFFER_CAPACITY);
+      head = ((head + 1) % BUFFER_CAPACITY);//creates a loop around for the buffer. 
       size++;
       printf("buffer filling, Head = %d, Tail = %d\n\r", head, tail);
     }
@@ -51,7 +51,7 @@ public:
       printf("Buffer Underrun\r\n");
     } else {
       data = buff[tail];
-      tail = ((tail + 1) % BUFFER_CAPACITY);
+      tail = ((tail + 1) % BUFFER_CAPACITY);//creates a loop around for the buffer. 
       size--;
       printf("buffer emptying, Head = %d, Tail = %d\n\r", head, tail);
     }

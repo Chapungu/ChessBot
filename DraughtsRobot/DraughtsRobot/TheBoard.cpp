@@ -2,7 +2,6 @@
 
 
 
-
 int TheBoard::GetBoard(int i){
         i--;
         return Board[i];
